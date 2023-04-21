@@ -1,0 +1,11 @@
+persistence:
+  enabled: true
+  existingClaim: jenkins-pv-claim
+  storageClass: local-storage
+  annotations: {}
+  labels: {}
+  accessMode: "ReadWriteOnce"
+  size: "10Gi"
+  volumes:
+  mounts:
+
