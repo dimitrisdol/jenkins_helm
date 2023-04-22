@@ -1,2 +1,26 @@
 controller:
   serviceType: LoadBalancer
+  
+persistence:
+  enabled: true
+  existingClaim: jenkins-pv-claim
+  storageClass: "local-storage"
+  provisioner: "kubernetes.io/no-provisioner"
+  volumeBindingMode: "WaitForFirstConsumer"
+  accessMode: "ReadWriteOnce"
+  size: "10Gi"
+  pv:
+    name: "jenkins-pv-volume"
+    labels:
+      type: local
+    path: "/mnt"
+    nodeAffinity:
+      key: "kubernetes.io/hostname"
+      value: "192.168.60.26"
+  pvc:
+    name: "jenkins-pv-claim"
+  annotations: {}
+  labels: {}
+  volumes:
+  mounts:
+
