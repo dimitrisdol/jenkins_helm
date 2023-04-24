@@ -1,0 +1,10 @@
+metallb:
+  enabled: true
+  namespace: metallb-system
+  ipAddressPool:
+    enabled: true
+    name: first-pool
+    addresses:
+    - 192.168.1.100-192.168.1.130
+
+

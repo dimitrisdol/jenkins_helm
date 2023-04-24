@@ -7,4 +7,4 @@ VERSION=4.3.22
 helm repo add jenkinsci https://charts.jenkins.io
 helm repo update
 helm fetch jenkinsci/jenkins --version ${VERSION}
-mv jenkins-${VERSION}.tgz ../helmCharts/jenkins/jenkins-${VERSION}.tgz.origina
+mv jenkins-${VERSION}.tgz ../helmCharts/jenkins/jenkins-${VERSION}.tgz.original

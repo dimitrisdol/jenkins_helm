@@ -1,3 +1,7 @@
+controller:
+  serviceType: LoadBalancer
+#  jenkinsUriPrefix: /jenkins	
+
 persistence:
   enabled: true
   existingClaim: jenkins-pv-claim
