@@ -4,9 +4,9 @@ pipeline {
       inheritFrom "maven"
     }
   }
-  environment {
+ // environment {
 
-  }
+ // }
   stages{
     stage("Build"){
       steps{
