@@ -21,6 +21,9 @@ agent:
   podName: default
   customJenkinsLabels: default
   resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
     limits:
       cpu: "1"
       memory: "2048Mi"
