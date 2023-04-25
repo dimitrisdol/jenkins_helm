@@ -4,15 +4,29 @@ pipeline {
       inheritFrom "kube-agent"
     }
   }
- // environment {
+  environment {
 
- // }
+    // Docker ENV vars
+      USER_CREDENTIALS = credentials('Docker-credentials')
+      TAG = "0.0.${BUILD_NUMBER}"
+  }
+
   stages{
     stage("Build"){
       steps{
         container('maven'){
           // With tests passed build and package the app
           sh 'mvn -f app/pom.xml clean install'
+        }
+      }
+    }
+    stage("Containerize"){
+        steps{
+          container('podman'){
+          sh '''
+            podman login --tls-verify=false docker.io -u ${USER_CREDENTIALS_USR} -p ${USER_CREDENTIALS_PSW}
+            podman build --tls-verify=false -t ${USER_CREDENTIALS_USR}/sample-maven-web-app:${TAG} -f app/Dockerfile .
+             '''
         }
       }
     }

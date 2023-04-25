@@ -32,24 +32,6 @@ agent:
         serviceAccount: jenkins
         namespace: jenkins
         inheritFrom: "default"
-        initContainers:
-        -  name: init-docker-config
-           image: busybox
-           command: ["/bin/sh", "-c"]
-           args:
-           - |
-             echo '{
-             "exec-opts": ["native.cgroupdriver=systemd"],
-             "log-driver": "json-file",
-             "log-opts": {
-               "max-size": "100m"
-             },
-             "storage-driver": "overlay2",
-             "insecure-registries":["192.168.49.2:32002"]
-             }' > /etc/docker/daemon.json
-           volumeMounts:
-           - name: docker-config
-             mountPath: /etc/docker
         containers:
           - name: maven
             image: maven:3.8.7-openjdk-18-slim
@@ -60,23 +42,13 @@ agent:
             resourceRequestMemory: "512Mi"
             resourceLimitCpu: "1"
             resourceLimitMemory: "1024Mi"
-          - name: docker
-            image: docker:dind
-            command:
-            - dockerd
-            - '--host=unix:///var/run/docker.sock'
-            - '--host=tcp://0.0.0.0:2375'
+          - name: podman
+            image: quay.io/podman/stable
+            command: "sleep"
+            args: "99d"
             ttyEnabled: true
-            privileged: true
+            privileged: false
             resourceRequestCpu: "400m"
             resourceRequestMemory: "512Mi"
             resourceLimitCpu: "1"
             resourceLimitMemory: "1024Mi"
-            volumeMounts:
-            - name: docker-config
-              mountPath: /etc/docker
-        volumes:
-        - name: docker-config
-          hostPath:
-            path: /etc/docker
-
