@@ -47,7 +47,7 @@ agent:
             command: "sleep"
             args: "99d"
             ttyEnabled: true
-            privileged: false
+            privileged: true
             resourceRequestCpu: "400m"
             resourceRequestMemory: "512Mi"
             resourceLimitCpu: "1"
