@@ -1,0 +1,19 @@
+pipeline {
+   agent {
+    kubernetes {
+      inheritFrom "maven"
+    }
+  environment {
+
+  }
+  stages{
+    stage("Build"){
+      steps{
+        container('maven'){
+          // With tests passed build and package the app
+          sh 'mvn -f app/pom.xml clean install'
+        }
+      }
+    }
+  }
+}
