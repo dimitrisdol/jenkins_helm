@@ -4,5 +4,5 @@ COPY app/pom.xml  .pom.xml
 RUN mvn -f .pom.xml clean package
 
 FROM docker.io/tomcat:9.0.48-jdk11-openjdk-slim
-COPY --from=build target/app.war /usr/local/tomcat/webapps/app.war
+COPY --from=build target/sample-web-app.war /usr/local/tomcat/webapps/sample-web-app.war
 EXPOSE 8080
