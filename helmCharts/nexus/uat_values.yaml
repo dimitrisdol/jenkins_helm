@@ -25,4 +25,4 @@ persistence:
     path: "/nexus-data"
     nodeAffinity:
       key: "kubernetes.io/hostname"
-      value: "192.168.60.26"
+      value: "node1"

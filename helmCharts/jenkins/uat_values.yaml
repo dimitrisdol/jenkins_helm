@@ -16,7 +16,7 @@ persistence:
     path: "/mnt"
     nodeAffinity:
       key: "kubernetes.io/hostname"
-      value: "192.168.60.26"
+      value: "node1"
   pvc:
     name: "jenkins-pv-claim"
   annotations: {}
